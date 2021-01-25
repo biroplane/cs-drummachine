@@ -1,5 +1,5 @@
 <template>
-  <button class="pad" :class="hit ? 'down':null" @mousedown="push(true)" @mouseup="push(false)" >
+  <button class="pad" :class="hit ? 'down':null" @click="push" >
     {{pad.label}} - ({{pad.trigger}})
   </button>
 </template>
@@ -18,20 +18,16 @@ export default {
     }
   },
   mounted(){
+
     this.audio=new Audio(`/sounds/${this.pad.sound}`);
+    this.audio.preload=true
   },
   methods:{
-    push(val){
-      console.log("CLICK",this.audio)
-      if(this.hit){
-        
-        this.audio.play()
-
-      }else{
+    push(val){        
         this.audio.pause();
         this.audio.currentTime = 0;
+        this.audio.play()
 
-      }
     },
    
   }
